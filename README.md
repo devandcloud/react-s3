@@ -1,46 +1,132 @@
-# Getting Started with Create React App
+# React S3 Deployment Boilerplate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ce projet est une application React TypeScript moderne, optimisée pour le déploiement sur AWS S3 avec CloudFront. Il inclut une configuration complète pour le développement et la production, avec un design responsive construit avec Tailwind CSS et des animations fluides avec Framer Motion.
 
-## Available Scripts
+## 🚀 Fonctionnalités
 
-In the project directory, you can run:
+- **Page d'accueil** avec section héro, fonctionnalités et appel à l'action
+- **Page Services** présentant les offres avec des cartes interactives
+- **Design responsive** qui s'adapte à tous les appareils
+- **Animations fluides** avec Framer Motion
+- **Navigation** avec React Router v6
+- **Optimisé pour le SEO** et les performances
+- **Configuration TypeScript** stricte
+- **Gestion des dépendances** avec pnpm
 
-### `npm start`
+## 🛠️ Technologies utilisées
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- ⚛️ React 19 avec TypeScript
+- 🎨 Tailwind CSS avec plugins officiels
+- 🚀 Vite comme bundler ultra-rapide
+- 🎭 Framer Motion pour les animations
+- 🔄 React Router v6 pour la navigation
+- 📦 pnpm pour une gestion efficace des paquets
+- ☁️ AWS S3 + CloudFront pour le déploiement
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🚀 Démarrage rapide
 
-### `npm test`
+### Prérequis
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js 18+
+- pnpm 8+
+- Un compte AWS (pour le déploiement)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Cloner le dépôt :
+   ```bash
+   git clone https://github.com/devandcloud/react-s3.git
+   cd react-s3
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Installer les dépendances avec pnpm :
+   ```bash
+   pnpm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Démarrer l'environnement de développement :
+   ```bash
+   pnpm dev
+   ```
 
-### `npm run eject`
+4. L'application sera disponible sur [http://localhost:5173](http://localhost:5173)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🛠️ Commandes disponibles
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `pnpm dev` - Démarrer le serveur de développement
+- `pnpm build` - Construire pour la production
+- `pnpm preview` - Prévisualiser la version de production localement
+- `pnpm test` - Lancer les tests
+- `pnpm lint` - Vérifier le code avec ESLint
+- `pnpm format` - Formater le code avec Prettier
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🏗️ Construction pour la production
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Pour créer une version optimisée pour la production :
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Les fichiers de production seront générés dans le dossier `dist/`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ☁️ Déploiement sur AWS S3
+
+1. **Configurer AWS CLI** :
+   ```bash
+   aws configure
+   ```
+   Entrez vos clés d'accès AWS (créées depuis la console IAM).
+
+2. **Créer un bucket S3** :
+   ```bash
+   aws s3 mb s3://votre-nom-de-bucket --region votre-region
+   ```
+
+3. **Activer l'hébergement de site web statique** :
+   ```bash
+   aws s3 website s3://votre-nom-de-bucket/ --index-document index.html --error-document index.html
+   ```
+
+4. **Configurer les permissions du bucket** :
+   Créez un fichier `bucket-policy.json` :
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "PublicReadGetObject",
+         "Effect": "Allow",
+         "Principal": "*",
+         "Action": "s3:GetObject",
+         "Resource": "arn:aws:s3:::votre-nom-de-bucket/*"
+       }
+     ]
+   }
+   ```
+   Puis appliquez la politique :
+   ```bash
+   aws s3api put-bucket-policy --bucket votre-nom-de-bucket --policy file://bucket-policy.json
+   ```
+
+5. **Déployer l'application** :
+   ```bash
+   npm run build
+   aws s3 sync dist/ s3://votre-nom-de-bucket --delete
+   ```
+
+6. **Configurer CloudFront (optionnel mais recommandé)** :
+   - Créez une distribution CloudFront pointant vers votre bucket S3
+   - Configurez le nom de domaine personnalisé et le certificat SSL
+
+## 📄 Licence
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus d'informations.
+
+## ✨ Auteur
+
+- **Votre Nom** - [@votre-username](https://github.com/votre-username)
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
