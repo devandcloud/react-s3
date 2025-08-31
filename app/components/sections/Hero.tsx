@@ -26,16 +26,16 @@ const Hero = () => {
               className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm mb-6"
             >
               <span className="w-2 h-2 rounded-full bg-primary-500 mr-2"></span>
-              <span className="text-sm font-medium text-primary-700">Déployez votre application React en un clin d'œil</span>
+              <span className="text-sm font-medium text-primary-700">Deploy your React app in a blink</span>
             </motion.div>
 
             <h1 className="heading-1 mb-6">
-              <span className="block">Déployez votre application</span>
-              <span className="text-gradient">sans tracas sur AWS S3</span>
+              <span className="block">Deploy your application</span>
+              <span className="text-gradient">effortlessly on AWS S3</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
-              Une solution complète pour héberger et déployer vos applications React sur AWS S3 avec une configuration optimisée pour les performances et la sécurité.
+              A complete solution to host and deploy your React applications on AWS S3 with performance and security optimized configuration.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -44,7 +44,7 @@ const Hero = () => {
                 whileTap={{ scale: 0.98 }}
                 className="btn btn-primary group"
               >
-                Commencer gratuitement
+                Get Started for Free
                 <ArrowRightIcon className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </motion.button>
               
@@ -54,7 +54,7 @@ const Hero = () => {
                 className="btn btn-secondary group"
               >
                 <PlayIcon className="w-5 h-5 mr-2 text-primary-600" />
-                Voir la démo
+                Watch Demo
               </motion.button>
             </div>
 
@@ -65,7 +65,7 @@ const Hero = () => {
                     <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"></div>
                   ))}
                 </div>
-                <span className="ml-3">Rejoint par plus de <span className="font-semibold text-gray-900">10 000+</span> développeurs</span>
+                <span className="ml-3">Joined by over <span className="font-semibold text-gray-900">10,000+</span> developers</span>
               </div>
             </div>
           </motion.div>

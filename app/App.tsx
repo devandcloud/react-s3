@@ -1,6 +1,6 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
+import { HelmetProvider } from 'react-helmet-async';
 
 // Layout
 import Navbar from "./components/layout/Navbar";
@@ -8,9 +8,12 @@ import Navbar from "./components/layout/Navbar";
 // Pages
 import Home from "./pages/Home/Home";
 import Services from "./pages/Services/Services";
+import About from "./pages/About/About";
+import Contact from "./pages/Contact/Contact";
 
 function App() {
   return (
+    <HelmetProvider>
     <Router>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <Navbar />
@@ -18,6 +21,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </AnimatePresence>
 
@@ -27,7 +32,7 @@ function App() {
               <div className="mb-4 md:mb-0">
                 <h2 className="text-xl font-bold text-gray-900">React S3</h2>
                 <p className="text-gray-600">
-                  Déployez votre application React en un clin d'œil
+                  Deploy your React application in a blink of an eye
                 </p>
               </div>
               <div className="flex space-x-6">
@@ -67,14 +72,14 @@ function App() {
             </div>
             <div className="mt-8 pt-8 border-t border-gray-200">
               <p className="text-center text-gray-500 text-sm">
-                &copy; {new Date().getFullYear()} React S3. Tous droits
-                réservés.
+                &copy; {new Date().getFullYear()} React S3. All rights reserved.
               </p>
             </div>
           </div>
         </footer>
       </div>
     </Router>
+    </HelmetProvider>
   );
 }
 

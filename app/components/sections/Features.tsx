@@ -10,39 +10,39 @@ import {
 
 const features = [
   {
-    name: "Déploiement instantané",
+    name: "Instant Deployment",
     description:
-      "Déployez votre application React en quelques secondes avec une configuration optimisée pour AWS S3 et CloudFront.",
+      "Deploy your React app in seconds with optimized configuration for AWS S3 and CloudFront.",
     icon: CloudArrowUpIcon,
   },
   {
-    name: "Haute performance",
+    name: "High Performance",
     description:
-      "Profitez de temps de chargement ultra-rapides grâce à la distribution globale via le CDN AWS CloudFront.",
+      "Enjoy ultra-fast loading times thanks to global distribution via AWS CloudFront CDN.",
     icon: LightBulbIcon,
   },
   {
-    name: "Sécurité renforcée",
+    name: "Enhanced Security",
     description:
-      "Protection DDoS intégrée, HTTPS par défaut et politiques de sécurité strictes pour vos données.",
+      "Built-in DDoS protection, HTTPS by default, and strict security policies for your data.",
     icon: ShieldCheckIcon,
   },
   {
-    name: "Mise à l'échelle automatique",
+    name: "Auto Scaling",
     description:
-      "Gérez facilement les pics de trafic avec une infrastructure qui s'adapte automatiquement à votre charge.",
+      "Easily handle traffic spikes with infrastructure that automatically adapts to your load.",
     icon: ChartBarIcon,
   },
   {
-    name: "Intégration CI/CD",
+    name: "CI/CD Integration",
     description:
-      "Automatisez vos déploiements avec GitHub Actions, GitLab CI ou d'autres outils d'intégration continue.",
+      "Automate your deployments with GitHub Actions, GitLab CI, or other CI/CD tools.",
     icon: CodeBracketIcon,
   },
   {
-    name: "Disponibilité mondiale",
+    name: "Global Availability",
     description:
-      "Soyez accessible partout dans le monde avec une latence minimale grâce aux points de présence mondiaux d'AWS.",
+      "Be accessible worldwide with minimal latency thanks to AWS's global network of edge locations.",
     icon: GlobeAltIcon,
   },
 ];
@@ -59,7 +59,7 @@ const Features = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Tout ce dont vous avez besoin pour déployer avec succès
+            Everything you need to deploy successfully
           </motion.h2>
           <motion.p
             className="text-lg text-gray-600"
@@ -68,9 +68,8 @@ const Features = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Une solution complète pour héberger et déployer vos applications
-            React sur AWS S3 avec une configuration optimisée pour les
-            performances et la sécurité.
+            A complete solution to host and deploy your React applications
+            on AWS S3 with performance and security optimized configuration.
           </motion.p>
         </div>
 

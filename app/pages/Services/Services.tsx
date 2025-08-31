@@ -7,72 +7,73 @@ import {
   CloudIcon,
   ChartBarIcon
 } from '@heroicons/react/24/outline';
+import SEO from '../../components/seo/SEO';
 
 const services = [
   {
-    name: 'Hébergement sur S3',
-    description: 'Stockage sécurisé et haute disponibilité pour vos applications React avec Amazon S3.',
+    name: 'S3 Hosting',
+    description: 'Secure and highly available storage for your React applications with Amazon S3.',
     icon: ServerIcon,
     features: [
-      'Stockage haute durabilité (99.999999999%)',
-      'Disponibilité de 99.99%',
-      'Chiffrement des données au repos',
-      'Versioning des fichiers'
+      'High durability storage (99.999999999%)',
+      '99.99% availability',
+      'Data encryption at rest',
+      'File versioning'
     ]
   },
   {
-    name: 'Distribution CDN',
-    description: 'Accélérez votre site avec la distribution mondiale via CloudFront.',
+    name: 'CDN Distribution',
+    description: 'Speed up your site with global distribution via CloudFront.',
     icon: CloudIcon,
     features: [
-      'Réseau mondial de points de présence',
-      'Accélération des performances',
-      'HTTPS par défaut',
-      'Cache intelligent'
+      'Global network of edge locations',
+      'Performance acceleration',
+      'HTTPS by default',
+      'Smart caching'
     ]
   },
   {
-    name: 'Sécurité avancée',
-    description: 'Protégez votre application avec nos configurations de sécurité avancées.',
+    name: 'Advanced Security',
+    description: 'Protect your application with our advanced security configurations.',
     icon: ShieldCheckIcon,
     features: [
-      'Certificats SSL/TLS gratuits',
-      'Protection DDoS',
-      'Politiques de sécurité strictes',
-      'Contrôle d\'accès granulaire'
+      'Free SSL/TLS certificates',
+      'DDoS protection',
+      'Strict security policies',
+      'Granular access control'
     ]
   },
   {
-    name: 'Mise à l\'échelle automatique',
-    description: 'Gérez les pics de trafic sans souci avec notre infrastructure élastique.',
+    name: 'Auto Scaling',
+    description: 'Handle traffic spikes with our elastic infrastructure.',
     icon: ChartBarIcon,
     features: [
-      'Mise à l\'échelle automatique',
-      'Équilibrage de charge',
-      'Surveillance des performances',
-      'Rapports détaillés'
+      'Automatic scaling',
+      'Load balancing',
+      'Performance monitoring',
+      'Detailed reports'
     ]
   },
   {
-    name: 'Déploiement continu',
-    description: 'Automatisez vos déploiements avec nos pipelines CI/CD.',
+    name: 'Continuous Deployment',
+    description: 'Automate your deployments with our CI/CD pipelines.',
     icon: LightBulbIcon,
     features: [
-      'Intégration avec GitHub/GitLab',
-      'Déploiements sans temps d\'arrêt',
-      'Rollback en un clic',
-      'Environnements multiples'
+      'GitHub/GitLab integration',
+      'Zero-downtime deployments',
+      'One-click rollback',
+      'Multiple environments'
     ]
   },
   {
-    name: 'Support technique',
-    description: 'Notre équipe d\'experts est là pour vous aider 24/7.',
+    name: 'Technical Support',
+    description: 'Our team of experts is here to help you 24/7.',
     icon: CogIcon,
     features: [
-      'Support prioritaire',
-      'Assistance technique 24/7',
-      'Temps de réponse garanti',
-      'Experts AWS certifiés'
+      'Priority support',
+      '24/7 technical assistance',
+      'Guaranteed response time',
+      'AWS certified experts'
     ]
   }
 ];
@@ -81,58 +82,95 @@ const pricingPlans = [
   {
     name: 'Starter',
     price: '0',
-    description: 'Parfait pour les petits projets et tests',
+    description: 'Perfect for small projects and testing',
     features: [
-      'Jusqu\'à 10 000 requêtes/mois',
-      '5 Go de bande passante/mois',
-      'Support par email',
-      'SLA 99%',
-      '1 environnement de déploiement'
+      'Up to 10,000 requests/month',
+      '5GB bandwidth/month',
+      'Email support',
+      '99% SLA',
+      '1 deployment environment'
     ],
-    cta: 'Commencer gratuitement',
+    cta: 'Get Started for Free',
     popular: false
   },
   {
     name: 'Pro',
     price: '29',
-    description: 'Idéal pour les startups en croissance',
+    description: 'Ideal for growing startups',
     features: [
-      'Jusqu\'à 100 000 requêtes/mois',
-      '50 Go de bande passante/mois',
-      'Support prioritaire',
-      'SLA 99.9%',
-      '3 environnements de déploiement',
-      'Analytiques avancées'
+      'Up to 100,000 requests/month',
+      '50GB bandwidth/month',
+      'Priority support',
+      '99.9% SLA',
+      '3 deployment environments',
+      'Performance monitoring'
     ],
-    cta: 'Essai gratuit de 14 jours',
+    cta: 'Choose Pro',
     popular: true
   },
   {
-    name: 'Entreprise',
-    price: 'Personnalisé',
-    description: 'Solution sur mesure pour les grandes entreprises',
+    name: 'Enterprise',
+    price: 'Custom',
+    description: 'For businesses with specific needs',
     features: [
-      'Volume illimité',
-      'Bande passante illimitée',
-      'Support 24/7',
-      'SLA 99.99%',
-      'Environnements illimités',
-      'Dédié & personnalisé'
+      'Unlimited volume',
+      'Unlimited bandwidth',
+      '24/7 support with dedicated engineer',
+      '99.99% SLA',
+      'Unlimited environments',
+      'Advanced security'
     ],
-    cta: 'Contactez-nous',
+    cta: 'Contact Us',
     popular: false
   }
 ];
 
 const Services = () => {
   return (
-    <motion.div 
-      className="min-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
+    <>
+      <SEO 
+        title="React S3 Hosting Services - AWS Cloud Solutions"
+        description="Professional React application hosting on AWS S3 with CloudFront CDN. Our services include automated deployments, SSL, and global content delivery."
+        keywords="React hosting, S3 deployment, AWS CloudFront, CDN, static site hosting, SSL certificate, CI/CD, web performance"
+        ogType="website"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "serviceType": "Web Hosting",
+          "provider": {
+            "@type": "Organization",
+            "name": "React S3 Hosting"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Hosting Services",
+            "itemListElement": [
+              {
+                "@type": "Service",
+                "name": "S3 Hosting",
+                "description": "Secure and scalable S3 hosting for React applications"
+              },
+              {
+                "@type": "Service",
+                "name": "CDN Distribution",
+                "description": "Global content delivery network for fast loading times"
+              },
+              {
+                "@type": "Service",
+                "name": "SSL Certificates",
+                "description": "Free SSL certificates for secure HTTPS connections"
+              }
+            ]
+          }
+        }}
+      />
+      <motion.div 
+        className="min-h-screen"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-primary-50 to-primary-100">
         <div className="container">
@@ -143,7 +181,7 @@ const Services = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              Nos <span className="text-gradient">Services</span>
+              Our <span className="text-gradient">Services</span>
             </motion.h1>
             <motion.p 
               className="text-xl text-gray-700"
@@ -151,7 +189,7 @@ const Services = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Découvrez comment nous pouvons vous aider à déployer et gérer votre application React sur AWS S3 avec facilité et efficacité.
+              Discover how we can help you deploy and manage your React application on AWS S3 with ease and efficiency.
             </motion.p>
           </div>
         </div>
@@ -203,7 +241,7 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              Des tarifs simples et transparents
+              Our Pricing
             </motion.h2>
             <motion.p 
               className="text-lg text-gray-600"
@@ -212,7 +250,7 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Choisissez le plan qui correspond le mieux à vos besoins. Pas de frais cachés, pas de mauvaises surprises.
+              Choose the plan that best fits your needs. No hidden fees, no surprises.
             </motion.p>
           </div>
 
@@ -228,7 +266,7 @@ const Services = () => {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-500 text-white text-xs font-semibold px-4 py-1 rounded-full">
-                    Le plus populaire
+                    Most Popular
                   </div>
                 )}
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
@@ -236,10 +274,10 @@ const Services = () => {
                 
                 <div className="mb-8">
                   <span className="text-4xl font-bold text-gray-900">
-                    {plan.price === '0' ? 'Gratuit' : `$${plan.price}`}
+                    {plan.price === '0' ? 'Free' : plan.price === 'Custom' ? 'Custom' : `$${plan.price}`}
                   </span>
-                  {plan.price !== '0' && plan.price !== 'Personnalisé' && (
-                    <span className="text-gray-500">/mois</span>
+                  {plan.price !== '0' && plan.price !== 'Custom' && (
+                    <span className="text-gray-500">/month</span>
                   )}
                 </div>
                 
@@ -268,9 +306,9 @@ const Services = () => {
           </div>
 
           <div className="mt-16 text-center">
-            <p className="text-gray-600 mb-6">Vous avez des besoins spécifiques ? Notre équipe est là pour vous aider.</p>
+            <p className="text-gray-600 mb-6">Do you have specific needs? Our team is here to help you.</p>
             <button className="btn btn-secondary px-8 py-3">
-              Contactez-nous
+              Contact Us
             </button>
           </div>
         </div>
@@ -287,7 +325,7 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              Prêt à déployer votre application React ?
+              Ready to deploy your React application?
             </motion.h2>
             <motion.p 
               className="text-xl mb-10 text-primary-100"
@@ -296,7 +334,7 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Rejoignez des milliers de développeurs qui font confiance à notre solution pour héberger leurs applications React sur AWS S3.
+              Join thousands of developers who trust our solution to host their React applications on AWS S3.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -306,16 +344,17 @@ const Services = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <button className="bg-white text-primary-700 hover:bg-gray-100 px-8 py-4 rounded-xl font-medium text-lg transition-colors duration-200">
-                Commencer gratuitement
+                Get Started for Free
               </button>
               <button className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 rounded-xl font-medium text-lg transition-colors duration-200">
-                Voir la documentation
+                View Documentation
               </button>
             </motion.div>
           </div>
         </div>
       </section>
-    </motion.div>
+      </motion.div>
+    </>
   );
 };
 

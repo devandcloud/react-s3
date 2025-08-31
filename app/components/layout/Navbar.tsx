@@ -18,7 +18,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Accueil", path: "/" },
+    { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
@@ -64,7 +64,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               className="ml-4 px-6 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full font-medium shadow-lg hover:shadow-xl hover:shadow-primary-500/20 transition-all duration-300"
             >
-              Commencer
+              Get Started
             </motion.button>
           </nav>
 
