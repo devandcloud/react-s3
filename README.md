@@ -1,95 +1,125 @@
 # React S3 Deployment Boilerplate
 
-Ce projet est une application React TypeScript moderne, optimisée pour le déploiement sur AWS S3 avec CloudFront. Il inclut une configuration complète pour le développement et la production, avec un design responsive construit avec Tailwind CSS et des animations fluides avec Framer Motion.
+This is a modern React TypeScript application built with Vite, optimized for deployment on AWS S3 with CloudFront. It includes a complete configuration for both development and production, featuring a responsive design built with Tailwind CSS and smooth animations using Framer Motion.
 
-## 🚀 Fonctionnalités
+## 🚀 Features
 
-- **Page d'accueil** avec section héro, fonctionnalités et appel à l'action
-- **Page Services** présentant les offres avec des cartes interactives
-- **Design responsive** qui s'adapte à tous les appareils
-- **Animations fluides** avec Framer Motion
-- **Navigation** avec React Router v6
-- **Optimisé pour le SEO** et les performances
-- **Configuration TypeScript** stricte
-- **Gestion des dépendances** avec pnpm
+- ⚡ **Blazing Fast** - Built with Vite for lightning-fast development and production builds
+- 🎨 **Modern UI** - Beautiful, responsive design with Tailwind CSS
+- ✨ **Smooth Animations** - Powered by Framer Motion
+- 🔄 **Client-Side Routing** - Using React Router v6
+- 🛠 **Type-Safe** - Full TypeScript support
+- 🧪 **Testing** - Set up with Vitest and React Testing Library
+- 🚀 **Optimized for Production** - Ready for deployment to AWS S3 + CloudFront
 
-## 🛠️ Technologies utilisées
+## 🛠️ Tech Stack
 
-- ⚛️ React 19 avec TypeScript
-- 🎨 Tailwind CSS avec plugins officiels
-- 🚀 Vite comme bundler ultra-rapide
-- 🎭 Framer Motion pour les animations
-- 🔄 React Router v6 pour la navigation
-- 📦 pnpm pour une gestion efficace des paquets
-- ☁️ AWS S3 + CloudFront pour le déploiement
+- ⚛️ [React 19](https://reactjs.org/) with TypeScript
+- 🎨 [Tailwind CSS](https://tailwindcss.com/) with official plugins
+- ⚡ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- 🎭 [Framer Motion](https://www.framer.com/motion/) - Animation library
+- 🔄 [React Router v6](https://reactrouter.com/) - Client-side routing
+- 🧪 [Vitest](https://vitest.dev/) - Testing framework
+- ☁️ AWS S3 + CloudFront - Deployment
 
-## 🚀 Démarrage rapide
+## 🚀 Quick Start
 
-### Prérequis
+### Prerequisites
 
-- Node.js 18+
-- pnpm 8+
-- Un compte AWS (pour le déploiement)
+- Node.js 18 or higher
+- pnpm 8 or higher
+- An AWS account (for deployment)
 
-### Installation
+### 🚀 Getting Started
 
-1. Cloner le dépôt :
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/devandcloud/react-s3.git
+   git clone https://github.com/yourusername/react-s3.git
    cd react-s3
    ```
 
-2. Installer les dépendances avec pnpm :
+2. **Install dependencies**
    ```bash
    pnpm install
    ```
 
-3. Démarrer l'environnement de développement :
+3. **Start the development server**
    ```bash
    pnpm dev
    ```
 
-4. L'application sera disponible sur [http://localhost:5173](http://localhost:5173)
+4. **Open in your browser**
+   The app will be available at [http://localhost:3000](http://localhost:3000)
 
-## 🛠️ Commandes disponibles
+## 🏗️ Project Structure
 
-- `pnpm dev` - Démarrer le serveur de développement
-- `pnpm build` - Construire pour la production
-- `pnpm preview` - Prévisualiser la version de production localement
-- `pnpm test` - Lancer les tests
-- `pnpm lint` - Vérifier le code avec ESLint
-- `pnpm format` - Formater le code avec Prettier
-
-## 🏗️ Construction pour la production
-
-Pour créer une version optimisée pour la production :
-
-```bash
-npm run build
+```
+react-s3/
+├── app/                    # Main application code
+│   ├── components/         # Reusable UI components
+│   ├── pages/              # Page components
+│   ├── assets/             # Static assets (images, fonts, etc.)
+│   ├── styles/             # Global styles and Tailwind configuration
+│   ├── utils/              # Utility functions and helpers
+│   ├── App.tsx             # Main application component
+│   └── main.tsx            # Application entry point
+├── public/                 # Static files
+│   └── index.html          # Main HTML file
+├── .github/                # GitHub workflows and templates
+├── .vscode/                # VSCode settings
+├── node_modules/           # Dependencies
+├── .eslintrc.js            # ESLint configuration
+├── .gitignore             # Git ignore file
+├── index.html              # Vite entry point (points to public/index.html)
+├── package.json            # Project dependencies and scripts
+├── postcss.config.mjs      # PostCSS configuration
+├── tailwind.config.ts      # Tailwind CSS configuration
+├── tsconfig.json           # TypeScript configuration
+├── tsconfig.node.json      # TypeScript configuration for Node
+└── vite.config.mjs         # Vite configuration
 ```
 
-Les fichiers de production seront générés dans le dossier `dist/`.
+## 🛠️ Available Commands
 
-## ☁️ Déploiement sur AWS S3
+- `pnpm dev` - Start the development server
+- `pnpm build` - Build for production
+- `pnpm preview` - Preview the production build locally
+- `pnpm test` - Run tests
+- `pnpm test:watch` - Run tests in watch mode
+- `pnpm test:coverage` - Generate test coverage report
+- `pnpm lint` - Lint your code
+- `pnpm format` - Format code with Prettier
 
-1. **Configurer AWS CLI** :
+## 🏗️ Building for Production
+
+To create an optimized production build:
+
+```bash
+pnpm build
+```
+
+This will create a production-ready build in the `dist/` directory, which is ready to be deployed to AWS S3.
+
+## ☁️ Deploying to AWS S3
+
+1. **Configure AWS CLI**:
    ```bash
    aws configure
    ```
-   Entrez vos clés d'accès AWS (créées depuis la console IAM).
+   Enter your AWS access keys (created from IAM console).
 
-2. **Créer un bucket S3** :
+2. **Create an S3 bucket**:
    ```bash
-   aws s3 mb s3://votre-nom-de-bucket --region votre-region
+   aws s3 mb s3://your-bucket-name --region your-region
    ```
 
-3. **Activer l'hébergement de site web statique** :
+3. **Enable static website hosting**:
    ```bash
-   aws s3 website s3://votre-nom-de-bucket/ --index-document index.html --error-document index.html
+   aws s3 website s3://your-bucket-name/ --index-document index.html --error-document index.html
    ```
 
-4. **Configurer les permissions du bucket** :
-   Créez un fichier `bucket-policy.json` :
+4. **Configure bucket permissions**:
+   Create a `bucket-policy.json` file:
    ```json
    {
      "Version": "2012-10-17",
@@ -99,34 +129,35 @@ Les fichiers de production seront générés dans le dossier `dist/`.
          "Effect": "Allow",
          "Principal": "*",
          "Action": "s3:GetObject",
-         "Resource": "arn:aws:s3:::votre-nom-de-bucket/*"
+         "Resource": "arn:aws:s3:::your-bucket-name/*"
        }
      ]
    }
    ```
-   Puis appliquez la politique :
+   Then apply the policy:
    ```bash
-   aws s3api put-bucket-policy --bucket votre-nom-de-bucket --policy file://bucket-policy.json
+   aws s3api put-bucket-policy --bucket your-bucket-name --policy file://bucket-policy.json
    ```
 
-5. **Déployer l'application** :
+5. **Deploy the application**:
    ```bash
-   npm run build
-   aws s3 sync dist/ s3://votre-nom-de-bucket --delete
+   pnpm build
+   aws s3 sync dist/ s3://your-bucket-name --delete
    ```
 
-6. **Configurer CloudFront (optionnel mais recommandé)** :
-   - Créez une distribution CloudFront pointant vers votre bucket S3
-   - Configurez le nom de domaine personnalisé et le certificat SSL
+6. **Set up CloudFront (recommended)**:
+   - Create a CloudFront distribution pointing to your S3 bucket
+   - Configure custom domain and SSL certificate
+   - Set up proper cache invalidation
 
-## 📄 Licence
+## 📄 License
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus d'informations.
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
-## ✨ Auteur
+## ✨ Author
 
-- **Votre Nom** - [@votre-username](https://github.com/votre-username)
+- **Your Name** - [@choksel](https://github.com/choksel)
 
-## 🤝 Contribution
+## 🤝 Contributing
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
+Contributions are welcome! Feel free to open an issue or submit a pull request.
