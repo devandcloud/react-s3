@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { HelmetProvider } from 'react-helmet-async';
 
 // Layout
 import Navbar from "./components/layout/Navbar";
@@ -13,8 +12,7 @@ import Contact from "./pages/Contact/Contact";
 
 function App() {
   return (
-    <HelmetProvider>
-    <Router>
+    <div data-testid="app">
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
         <Navbar />
         <AnimatePresence mode="wait">
@@ -78,8 +76,7 @@ function App() {
           </div>
         </footer>
       </div>
-    </Router>
-    </HelmetProvider>
+    </div>
   );
 }
 

@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["./app/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "@testing-library/jest-dom"]
   },
   "include": [
     "app/**/*.ts",
