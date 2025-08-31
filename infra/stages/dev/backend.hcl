@@ -1,5 +1,5 @@
-bucket = "devandcloud-tfstate"
-key    = "dev/terraform.tfstate"
+bucket = "projects-tfstate"
+key    = "react-s3/dev/terraform.tfstate"
 region = "eu-west-1"
-dynamodb_table = "devandcloud-lock"
+dynamodb_table = "projects-lock"
 encrypt        = true

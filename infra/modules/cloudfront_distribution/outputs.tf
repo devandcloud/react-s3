@@ -12,3 +12,7 @@ output "oai_arn" {
 output "hosted_zone_id" {
   value = aws_cloudfront_distribution.this.hosted_zone_id
 }
+
+output "cloudfront_id" {
+  value = aws_cloudfront_distribution.this.id
+}

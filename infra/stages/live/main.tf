@@ -2,13 +2,12 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-module "vpc" {
-  source = "../../modules/vpc"
-
-  vpc_cidr        = "10.1.0.0/16"   # différent de dev
-public_subnets  = ["10.1.1.0/24", "10.1.2.0/24"]
-private_subnets = ["10.1.101.0/24", "10.1.102.0/24"]
-
+# Récupération des informations du VPC existant
+module "vpc_data" {
+  source = "../../modules/vpc_data"
+  
+  vpc_id = var.vpc_id
+  
   tags = {
     stage   = "live"
     Project = "devandcloud"
@@ -22,17 +21,18 @@ module "cloudfront" {
   project_name   = "devandcloud-front"
   zone_id        = var.zone_id
   record_name    = var.record_name
+  
   tags = {
     stage   = "live"
     Project = "devandcloud"
   }
 }
 
-
 module "s3" {
   source             = "../../modules/s3_private_bucket"
   site_bucket_name   = var.site_bucket_name
   cloudfront_oai_arn = module.cloudfront.oai_arn
+  
   tags = {
     stage   = "live"
     Project = "devandcloud"

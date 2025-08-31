@@ -26,3 +26,13 @@ variable "zone_id" {
 variable "record_name" {
   type = string
 }
+
+variable "vpc_config" {
+  description = "Configuration for VPC endpoints and access"
+  type = object({
+    vpc_id             = string
+    private_subnet_ids = list(string)
+    public_subnet_ids  = list(string)
+  })
+  default = null
+}

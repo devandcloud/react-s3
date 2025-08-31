@@ -1,5 +1,4 @@
 aws_region       = "eu-west-1"
 stage            = "dev"
-site_bucket_name = "devandcloud-static-site-dev"
-zone_id          = "Z03099401FTXTOLXAKAJ2"
-record_name      = "dev-7f746cca7e9e.devandcloud.com"
+site_bucket_name = "react-s3-static-site-dev"
+record_name      = "react-s3-dev.devandcloud.com"

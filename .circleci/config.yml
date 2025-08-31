@@ -2,8 +2,6 @@ version: 2.1
 
 orbs:
   aws-cli: circleci/aws-cli@2.1.0
-  #terraform: circleci/terraform@3.6.0
-  #node: circleci/node@7.1.1
 
 executors:
   default-executor:
@@ -22,22 +20,25 @@ jobs:
     working_directory: ~/project
     steps:
       - checkout
-
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_REGION
       # Installer les dépendances nécessaires
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache curl python3 py3-pip jq
-            pip3 install --upgrade pip
-            pip3 install awscli
+      # - run:
+      #     name: Install dependencies
+      #     command: |
+      #       apk add --no-cache curl python3 py3-pip jq
+      #       pip3 install --upgrade pip
+      #       pip3 install awscli
 
-      # Configurer AWS CLI avec les clés d'accès
-      - run:
-          name: Configure AWS CLI
-          command: |
-            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-            aws configure set region $AWS_REGION
+      # # Configurer AWS CLI avec les clés d'accès
+      # - run:
+      #     name: Configure AWS CLI
+      #     command: |
+      #       aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      #       aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      #       aws configure set region $AWS_REGION
 
       # Initialiser Terraform
       - run:
@@ -82,7 +83,11 @@ jobs:
       - run:
           name: Invalidate CloudFront Cache
           command: |
-            aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+            cd infra/stages/<< parameters.stage >>
+            terraform init -backend-config=backend.hcl
+            CF_ID=$(terraform output -raw cloudfront_id)
+            echo "CloudFront ID = $CF_ID"
+            aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
 
 workflows:
   deploy-dev:
@@ -90,10 +95,10 @@ workflows:
       equal: [develop, << pipeline.git.branch >>]
     jobs:
       - terraform_apply:
-          context: devandcloud-dev
+          context: react-s3-dev
           stage: dev
       - build_and_deploy:
-          context: devandcloud-dev
+          context: react-s3-dev
           stage: dev
           requires:
             - terraform_apply
@@ -102,10 +107,10 @@ workflows:
       equal: [main, << pipeline.git.branch >>]
     jobs:
       - terraform_apply:
-          context: devandcloud-live
+          context: react-s3-live
           stage: live
       - build_and_deploy:
-          context: devandcloud-live
+          context: react-s3-live
           stage: live
           requires:
             - terraform_apply

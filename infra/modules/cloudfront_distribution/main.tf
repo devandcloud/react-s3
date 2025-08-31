@@ -52,6 +52,8 @@ resource "aws_cloudfront_distribution" "this" {
   default_root_object = "index.html"
 
   aliases = [var.record_name, "www.${var.record_name}"] # 🔹 Alternate Domain Names
+  
+  # Configuration VPC - Utilisation du VPC existant via les politiques de sécurité et les groupes de sécurité
 
   origin {
     domain_name = "${var.s3_bucket_name}.s3.${var.aws_region}.amazonaws.com"

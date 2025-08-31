@@ -1,3 +1,8 @@
+variable "vpc_id" {
+  description = "ID of the existing VPC to use"
+  type        = string
+}
+
 variable "aws_region" {
   type    = string
   default = "eu-west-1"

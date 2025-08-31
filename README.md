@@ -33,17 +33,20 @@ This is a modern React TypeScript application built with Vite, optimized for dep
 ### 🚀 Getting Started
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/react-s3.git
    cd react-s3
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Start the development server**
+
    ```bash
    pnpm dev
    ```
@@ -102,53 +105,10 @@ This will create a production-ready build in the `dist/` directory, which is rea
 
 ## ☁️ Deploying to AWS S3
 
-1. **Configure AWS CLI**:
-   ```bash
-   aws configure
-   ```
-   Enter your AWS access keys (created from IAM console).
-
-2. **Create an S3 bucket**:
-   ```bash
-   aws s3 mb s3://your-bucket-name --region your-region
-   ```
-
-3. **Enable static website hosting**:
-   ```bash
-   aws s3 website s3://your-bucket-name/ --index-document index.html --error-document index.html
-   ```
-
-4. **Configure bucket permissions**:
-   Create a `bucket-policy.json` file:
-   ```json
-   {
-     "Version": "2012-10-17",
-     "Statement": [
-       {
-         "Sid": "PublicReadGetObject",
-         "Effect": "Allow",
-         "Principal": "*",
-         "Action": "s3:GetObject",
-         "Resource": "arn:aws:s3:::your-bucket-name/*"
-       }
-     ]
-   }
-   ```
-   Then apply the policy:
-   ```bash
-   aws s3api put-bucket-policy --bucket your-bucket-name --policy file://bucket-policy.json
-   ```
-
-5. **Deploy the application**:
-   ```bash
-   pnpm build
-   aws s3 sync dist/ s3://your-bucket-name --delete
-   ```
-
-6. **Set up CloudFront (recommended)**:
-   - Create a CloudFront distribution pointing to your S3 bucket
-   - Configure custom domain and SSL certificate
-   - Set up proper cache invalidation
+6. **Set up VPC (if not already set up)**:
+   - Create a VPC, example: `my-dev-vpc`
+   - You should have your domain name registred on route53 (Hosted zone name)
+   - ...
 
 ## 📄 License
 
@@ -156,7 +116,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## ✨ Author
 
-- **Your Name** - [@choksel](https://github.com/choksel)
+- **Chokri** - [@choksel](https://github.com/choksel)
 
 ## 🤝 Contributing
 
