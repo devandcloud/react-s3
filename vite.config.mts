@@ -32,8 +32,11 @@ export default defineConfig(({ command, mode }) => {
       coverage: {
         reporter: ["text", "json", "html"],
         exclude: [
-          "node_modules/",
+          "**/node_modules/**",
           "app/setupTests.ts",
+          "**/dist/**",
+          "**/build/**",
+          "**/coverage/**",
           "**/*.d.ts",
           "**/types.ts",
         ],
