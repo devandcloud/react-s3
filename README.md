@@ -18,7 +18,7 @@ This is a modern React TypeScript application built with Vite, optimized for dep
 - 🎨 [Tailwind CSS](https://tailwindcss.com/) with official plugins
 - ⚡ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
 - 🎭 [Framer Motion](https://www.framer.com/motion/) - Animation library
-- 🔄 [React Router v6](https://reactrouter.com/) - Client-side routing
+- 🔄 [React Router v7](https://reactrouter.com/) - Client-side routing
 - 🧪 [Vitest](https://vitest.dev/) - Testing framework
 - ☁️ AWS S3 + CloudFront - Deployment
 
@@ -29,13 +29,14 @@ This is a modern React TypeScript application built with Vite, optimized for dep
 - Node.js 18 or higher
 - pnpm 8 or higher
 - An AWS account (for deployment)
+- CircleCI account (for CI/CD)
 
 ### 🚀 Getting Started
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/react-s3.git
+   git clone https://github.com/devandcloud/react-s3.git
    cd react-s3
    ```
 
@@ -62,8 +63,6 @@ react-s3/
 │   ├── components/         # Reusable UI components
 │   ├── pages/              # Page components
 │   ├── assets/             # Static assets (images, fonts, etc.)
-│   ├── styles/             # Global styles and Tailwind configuration
-│   ├── utils/              # Utility functions and helpers
 │   ├── App.tsx             # Main application component
 │   └── main.tsx            # Application entry point
 ├── public/                 # Static files
@@ -71,7 +70,7 @@ react-s3/
 ├── .github/                # GitHub workflows and templates
 ├── .vscode/                # VSCode settings
 ├── node_modules/           # Dependencies
-├── .eslintrc.js            # ESLint configuration
+├── eslint.config.mts       # ESLint configuration
 ├── .gitignore             # Git ignore file
 ├── index.html              # Vite entry point (points to public/index.html)
 ├── package.json            # Project dependencies and scripts
@@ -79,36 +78,49 @@ react-s3/
 ├── tailwind.config.ts      # Tailwind CSS configuration
 ├── tsconfig.json           # TypeScript configuration
 ├── tsconfig.node.json      # TypeScript configuration for Node
-└── vite.config.mjs         # Vite configuration
+└── vite.config.mts         # Vite configuration
 ```
 
 ## 🛠️ Available Commands
 
 - `pnpm dev` - Start the development server
-- `pnpm build` - Build for production
+- `pnpm build:dev` - Build for production with DEPLOY_ENV=dev
+- `pnpm build:live` - Build for production with DEPLOY_ENV=live
 - `pnpm preview` - Preview the production build locally
 - `pnpm test` - Run tests
 - `pnpm test:watch` - Run tests in watch mode
 - `pnpm test:coverage` - Generate test coverage report
-- `pnpm lint` - Lint your code
-- `pnpm format` - Format code with Prettier
+- `pnpm lint` - Lint code
+- `pnpm lint:fix` - Fix linting issues
+- `pnpm format` - Format code
 
 ## 🏗️ Building for Production
 
 To create an optimized production build:
 
 ```bash
-pnpm build
+pnpm build:dev # or pnpm build:live
 ```
 
-This will create a production-ready build in the `dist/` directory, which is ready to be deployed to AWS S3.
+This will create a production-ready build in the `build/` directory, which is ready to be deployed to AWS S3.
 
 ## ☁️ Deploying to AWS S3
 
 6. **Set up VPC (if not already set up)**:
    - Create a VPC, example: `my-dev-vpc`
    - You should have your domain name registred on route53 (Hosted zone name)
-   - ...
+   - CircleCI account & CircleCI context
+7. **Set AWS credentials**:
+   - Create an AWS access key and secret access key
+   - Add the following environment variables to your CircleCI context:
+     - AWS_ACCESS_KEY_ID
+     - AWS_SECRET_ACCESS_KEY
+     - AWS_REGION
+     - AWS_S3_BUCKET_NAME
+
+   See image below:
+
+   <img src="./doc/cci-context.png" alt="CCI Context">
 
 ## 📄 License
 
@@ -118,6 +130,18 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 - **Chokri** - [@choksel](https://github.com/choksel)
 
-## 🤝 Contributing
+## 🎯 Related images
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+### CCI Pipeline:
+
+<img src="./doc/cci-wf.png" alt="CCI Workflow">
+
+### AWS Architecture:
+
+<img src="./doc/aws-archi.png" alt="AWS Architecture">
+
+### Web site screenshots:
+
+<img src="./doc/web-site.png" alt="Web Site">
+
+<img src="./doc/web-site-services.png" alt="Web Site Services">
