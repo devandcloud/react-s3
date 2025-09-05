@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# terraform
+infra/*/*/.terraform.lock.hcl
+infra/*/.terraform
+infra/bootstrap/.terraform
+infra/bootstrap/.terraform.lock.hcl
