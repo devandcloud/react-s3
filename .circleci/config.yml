@@ -67,7 +67,16 @@ jobs:
       - terraform/apply:
           path: "infra/stages/<< parameters.stage >>"
           plan: "tfplan"
-
+      - run:
+          name: Get CloudFront ID
+          command: |
+            cd infra/stages/<< parameters.stage >>
+            CF_ID=$(terraform output -raw cloudfront_id)
+            echo $CF_ID > /tmp/cf_id.txt
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - cf_id.txt
   build_and_deploy:
     executor: default-executor
     working_directory: ~/project
@@ -86,9 +95,8 @@ jobs:
           command: |
             pnpm install
       - run:
-          name: Build Next.js app
+          name: Build React app
           command: |
-            cd src
             pnpm gen-robots:<< parameters.stage >>
             pnpm build:<< parameters.stage >>
       - aws-cli/setup:
@@ -107,7 +115,7 @@ jobs:
       #       echo "CloudFront ID = $CF_ID"
       #       aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
 
-  invalidate-cache:
+  invalidate_cache:
     docker:
       - image: cimg/base:stable
     steps:
@@ -154,6 +162,11 @@ workflows:
           context: react-s3-context
           requires:
             - "Terraform Apply"
+      - invalidate_cache:
+          name: "Invalidate CloudFront Cache"
+          context: react-s3-context
+          requires:
+            - "Build and Deploy"
   # deploy-live:
   #   when:
   #     equal: [main, << pipeline.git.branch >>]
