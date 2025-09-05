@@ -106,14 +106,6 @@ jobs:
           name: Deploy static site to S3
           command: |
             aws s3 sync build s3://$AWS_S3_BUCKET_NAME --delete
-      # - run:
-      #     name: Invalidate CloudFront Cache
-      #     command: |
-      #       cd infra/stages/<< parameters.stage >>
-      #       terraform init -backend-config=backend.hcl
-      #       CF_ID=$(terraform output -raw cloudfront_id)
-      #       echo "CloudFront ID = $CF_ID"
-      #       aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
 
   invalidate_cache:
     docker:
@@ -174,11 +166,37 @@ workflows:
   #   when:
   #     equal: [main, << pipeline.git.branch >>]
   #   jobs:
-  #     - terraform_apply:
-  #         context: react-s3-live
+  #     - terraform_init:
+  #         name: "Terraform Init"
   #         stage: live
-  #     - build_and_deploy:
-  #         context: react-s3-live
+  #         context: react-s3-context
+
+  #     - terraform_validate:
+  #         name: "Terraform Validate"
   #         stage: live
+  #         context: react-s3-context
   #         requires:
-  #           - terraform_apply
+  #           - "Terraform Init"
+  #     - terraform_plan:
+  #         name: "Terraform Plan"
+  #         stage: live
+  #         context: react-s3-context
+  #         requires:
+  #           - "Terraform Validate"
+  #     - terraform_apply:
+  #         name: "Terraform Apply"
+  #         stage: live
+  #         context: react-s3-context
+  #         requires:
+  #           - "Terraform Plan"
+  #     - build_and_deploy:
+  #         name: "Build and Deploy"
+  #         stage: live
+  #         context: react-s3-context
+  #         requires:
+  #           - "Terraform Apply"
+  #     - invalidate_cache:
+  #         name: "Invalidate CloudFront Cache"
+  #         context: react-s3-context
+  #         requires:
+  #           - "Build and Deploy"
