@@ -106,6 +106,33 @@ This will create a production-ready build in the `build/` directory, which is re
 
 ## ☁️ Deploying to AWS S3
 
+5. **Bootstrap Terraform Backend**:
+
+   Before running Terraform for the first time, you need to bootstrap the backend. This will create the S3 bucket to store the remote state and the DynamoDB table for state locking. This step is only required once from your local environment.
+   1. Go to the bootstrap directory:
+   ```bash
+   cd infra/bootstrap/
+   ```
+   2. Initialize Terraform with backend configuration:
+   ```bash
+   terraform init
+   ```
+   3. Preview the changes:
+   ```bash
+   terraform plan
+   ```
+   4. Apply the changes:
+   ```bash
+   terraform apply -auto-approve
+   ```
+   📢 Notes 
+
+      This step is only required once to set up the remote backend.
+
+      After bootstrapping, all subsequent runs can use terraform init to connect to the remote state.
+
+      Ensure you have the necessary AWS permissions to create the S3 bucket and DynamoDB table.
+
 6. **Set up VPC (if not already set up)**:
    - Create a VPC, example: `my-dev-vpc`
    - You should have your domain name registred on route53 (Hosted zone name)
