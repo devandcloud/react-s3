@@ -116,9 +116,9 @@ resource "aws_cloudfront_function" "redirect_www_and_rewrite_html" {
 function handler(event) {
     var request = event.request;
     var uri = request.uri;
-    var host = request.headers.host.value;
 
-    // 🔹 Redirection www → non-www
+    // Rediriger www → non-www
+    var host = request.headers.host.value;
     if (host.startsWith("www.")) {
         var newHost = host.slice(4);
         return {
@@ -130,23 +130,16 @@ function handler(event) {
         };
     }
 
-    // 🔹 Réécriture .html
-    if (uri === "/" || uri === "") {
-        uri = "/fr";
-    }
-
-    if (uri.includes('.')) {
-        request.uri = uri;
+    // Si le chemin demande un fichier réel (css, js, images...) → on laisse
+    if (uri.match(/\.[^\/]+$/)) {
         return request;
     }
 
-    if (uri.endsWith('/')) {
-        uri = uri.slice(0, -1);
-    }
-
-    request.uri = uri + ".html";
+    // Sinon → SPA → servir index.html
+    request.uri = "/index.html";
     return request;
 }
+
 EOT
 }
 
