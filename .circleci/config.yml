@@ -122,6 +122,12 @@ workflows:
           context: react-s3-context
           requires:
             - "Terraform Init"
+      - terraform_plan:
+          name: "Terraform Plan"
+          stage: dev
+          context: react-s3-context
+          requires:
+            - "Terraform Validate"
       # - build_and_deploy:
       #     context: react-s3-dev
       #     stage: dev
