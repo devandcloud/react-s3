@@ -97,7 +97,7 @@ jobs:
       - run:
           name: Deploy static site to S3
           command: |
-            aws s3 sync out s3://$AWS_S3_BUCKET_NAME --delete
+            aws s3 sync build s3://$AWS_S3_BUCKET_NAME --delete
       # - run:
       #     name: Invalidate CloudFront Cache
       #     command: |
@@ -148,11 +148,12 @@ workflows:
           context: react-s3-context
           requires:
             - "Terraform Plan"
-      # - build_and_deploy:
-      #     context: react-s3-dev
-      #     stage: dev
-      #     requires:
-      #       - terraform_apply
+      - build_and_deploy:
+          name: "Build and Deploy"
+          stage: dev
+          context: react-s3-context
+          requires:
+            - "Terraform Apply"
   # deploy-live:
   #   when:
   #     equal: [main, << pipeline.git.branch >>]
