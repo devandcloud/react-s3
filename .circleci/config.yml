@@ -55,6 +55,18 @@ jobs:
           root: .
           paths:
             - "infra/stages/<< parameters.stage >>/tfplan"
+  terraform_apply:
+    executor: terraform/default
+    parameters:
+      stage:
+        type: string
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - terraform/apply:
+          path: "infra/stages/<< parameters.stage >>"
+          plan: "tfplan"
 
   build_and_deploy:
     executor: default-executor
@@ -130,6 +142,12 @@ workflows:
           context: react-s3-context
           requires:
             - "Terraform Validate"
+      - terraform_apply:
+          name: "Terraform Apply"
+          stage: dev
+          context: react-s3-context
+          requires:
+            - "Terraform Plan"
       # - build_and_deploy:
       #     context: react-s3-dev
       #     stage: dev
