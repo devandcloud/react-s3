@@ -13,17 +13,17 @@
   }
 
   @font-face {
-    font-family: 'Inter var';
+    font-family: "Inter var";
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url('https://rsms.me/inter/font-files/Inter.var.woff2') format('woff2');
-    font-named-instance: 'Regular';
+    src: url("https://rsms.me/inter/font-files/Inter.var.woff2") format("woff2");
+    font-named-instance: "Regular";
   }
 
   @font-face {
-    font-family: 'Cal Sans';
-    src: url('https://cal.com/cal.ttf') format('truetype');
+    font-family: "Cal Sans";
+    src: url("https://cal.com/cal.ttf") format("truetype");
     font-weight: 400 700;
     font-style: normal;
     font-display: swap;
@@ -35,7 +35,9 @@
 
   body {
     @apply bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 antialiased min-h-screen;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 
   /* Scrollbar Styling */
@@ -92,8 +94,13 @@
 
 /* Animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .animate-float {

@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { ArrowRightIcon, PlayIcon } from '@heroicons/react/24/outline';
+import { motion } from "framer-motion";
+import { ArrowRightIcon, PlayIcon } from "@heroicons/react/24/outline";
 
 const Hero = () => {
   return (
@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
-          <motion.div 
+          <motion.div
             className="text-center lg:text-left"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -26,16 +26,19 @@ const Hero = () => {
               className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm mb-6"
             >
               <span className="w-2 h-2 rounded-full bg-primary-500 mr-2"></span>
-              <span className="text-sm font-medium text-primary-700">Deploy your React app in a blink</span>
+              <span className="text-sm font-medium text-primary-700">
+                Deploy your React app in a blink
+              </span>
             </motion.div>
 
             <h1 className="heading-1 mb-6">
               <span className="block">Deploy your application</span>
               <span className="text-gradient">effortlessly on AWS S3</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
-              A complete solution to host and deploy your React applications on AWS S3 with performance and security optimized configuration.
+              A complete solution to host and deploy your React applications on
+              AWS S3 with performance and security optimized configuration.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -47,7 +50,7 @@ const Hero = () => {
                 Get Started for Free
                 <ArrowRightIcon className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
               </motion.button>
-              
+
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -62,16 +65,23 @@ const Hero = () => {
               <div className="flex items-center">
                 <div className="flex -space-x-2">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"></div>
+                    <div
+                      key={i}
+                      className="w-8 h-8 rounded-full border-2 border-white bg-gray-200"
+                    ></div>
                   ))}
                 </div>
-                <span className="ml-3">Joined by over <span className="font-semibold text-gray-900">10,000+</span> developers</span>
+                <span className="ml-3">
+                  Joined by over{" "}
+                  <span className="font-semibold text-gray-900">10,000+</span>{" "}
+                  developers
+                </span>
               </div>
             </div>
           </motion.div>
 
           {/* Illustration */}
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -94,19 +104,32 @@ const Hero = () => {
                 <div className="mt-6 p-4 bg-primary-50 rounded-lg border border-primary-100">
                   <div className="flex items-center">
                     <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-primary-900">Déploiement réussi !</p>
-                      <p className="text-xs text-primary-600">Votre application est maintenant en ligne</p>
+                      <p className="text-sm font-medium text-primary-900">
+                        Déploiement réussi !
+                      </p>
+                      <p className="text-xs text-primary-600">
+                        Votre application est maintenant en ligne
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Decorative elements */}
             <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
             <div className="absolute -bottom-8 left-20 w-32 h-32 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>

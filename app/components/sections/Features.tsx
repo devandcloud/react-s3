@@ -68,8 +68,8 @@ const Features = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            A complete solution to host and deploy your React applications
-            on AWS S3 with performance and security optimized configuration.
+            A complete solution to host and deploy your React applications on
+            AWS S3 with performance and security optimized configuration.
           </motion.p>
         </div>
 
