@@ -10,7 +10,7 @@ module "vpc_data" {
   
   tags = {
     stage   = "dev"
-    Project = "devandcloud"
+    Project = "devandcloud-react-s3-demo"
   }
 }
 
@@ -18,13 +18,13 @@ module "cloudfront" {
   source         = "../../modules/cloudfront_distribution"
   s3_bucket_name = module.s3.bucket_name
   stage          = "dev"
-  project_name   = "devandcloud-front"
+  project_name   = "devandcloud-react-s3-demo"
   zone_id        = var.zone_id
   record_name    = var.record_name
   
   tags = {
     stage   = "dev"
-    Project = "devandcloud"
+    Project = "devandcloud-react-s3-demo"
   }
 }
 
@@ -35,7 +35,7 @@ module "s3" {
   
   tags = {
     stage   = "dev"
-    Project = "nextjs-site"
+    Project = "devandcloud-react-s3-demo"
   }
 }
 
