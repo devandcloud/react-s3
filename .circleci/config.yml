@@ -32,6 +32,7 @@ jobs:
       stage:
         type: string
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - terraform/validate:
@@ -43,6 +44,7 @@ jobs:
       stage:
         type: string
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - terraform/plan:
