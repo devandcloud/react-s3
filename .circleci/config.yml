@@ -1,8 +1,8 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@2.1.0
-
+  aws-cli: circleci/aws-cli@5.4.1
+  terraform: circleci/terraform@3.7.0
 executors:
   default-executor:
     docker:
@@ -10,43 +10,49 @@ executors:
     working_directory: ~/project
 
 jobs:
-  terraform_apply:
-    docker:
-      - image: alpine/terragrunt:1.5.7
+  terraform_init:
+    executor: terraform/default
     parameters:
       stage:
         type: string
-        default: dev
-    working_directory: ~/project
     steps:
       - checkout
-      - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_REGION
-      # Installer les dépendances nécessaires
-      # - run:
-      #     name: Install dependencies
-      #     command: |
-      #       apk add --no-cache curl python3 py3-pip jq
-      #       pip3 install --upgrade pip
-      #       pip3 install awscli
+      - attach_workspace:
+          at: .
+      - terraform/init:
+          path: "infra/stages/<< parameters.stage >>"
+          backend_config_file: "backend.hcl"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "infra/stages/<< parameters.stage >>"
+  terraform_validate:
+    executor: terraform/default
+    parameters:
+      stage:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - terraform/validate:
+          path: "infra/stages/<< parameters.stage >>"
 
-      # # Configurer AWS CLI avec les clés d'accès
-      # - run:
-      #     name: Configure AWS CLI
-      #     command: |
-      #       aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-      #       aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-      #       aws configure set region $AWS_REGION
-
-      # Initialiser Terraform
-      - run:
-          name: Terraform Init & Apply
-          command: |
-            cd infra/stages/<< parameters.stage >>
-            terraform init -backend-config=backend.hcl
-            terraform apply -auto-approve
+  terraform_plan:
+    executor: terraform/default
+    parameters:
+      stage:
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - terraform/plan:
+          path: "infra/stages/<< parameters.stage >>"
+          var_file: "terraform.tfvars"
+          out: "tfplan"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "infra/stages/<< parameters.stage >>/tfplan"
 
   build_and_deploy:
     executor: default-executor
@@ -57,7 +63,6 @@ jobs:
         default: dev
     steps:
       - checkout
-      #- node/install-packages
       - run:
           name: Install pnpm
           command: |
@@ -73,44 +78,64 @@ jobs:
             pnpm gen-robots:<< parameters.stage >>
             pnpm build:<< parameters.stage >>
       - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_REGION
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
       - run:
           name: Deploy static site to S3
           command: |
             aws s3 sync out s3://$AWS_S3_BUCKET_NAME --delete
-      - run:
-          name: Invalidate CloudFront Cache
-          command: |
-            cd infra/stages/<< parameters.stage >>
-            terraform init -backend-config=backend.hcl
-            CF_ID=$(terraform output -raw cloudfront_id)
-            echo "CloudFront ID = $CF_ID"
-            aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
+      # - run:
+      #     name: Invalidate CloudFront Cache
+      #     command: |
+      #       cd infra/stages/<< parameters.stage >>
+      #       terraform init -backend-config=backend.hcl
+      #       CF_ID=$(terraform output -raw cloudfront_id)
+      #       echo "CloudFront ID = $CF_ID"
+      #       aws cloudfront create-invalidation --distribution-id $CF_ID --paths "/*"
 
+  invalidate-cache:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Create CloudFront invalidation
+          command: |
+            CF_ID=$(cat /tmp/cf_id.txt)
+            aws cloudfront create-invalidation \
+              --distribution-id $CF_ID \
+              --paths "/*"
 workflows:
   deploy-dev:
     when:
       equal: [develop, << pipeline.git.branch >>]
     jobs:
-      - terraform_apply:
-          context: react-s3-dev
+      - terraform_init:
+          name: "Terraform Init"
           stage: dev
-      - build_and_deploy:
-          context: react-s3-dev
+          context: react-s3-context
+
+      - terraform_validate:
+          name: "Terraform Validate"
           stage: dev
+          context: react-s3-context
           requires:
-            - terraform_apply
-  deploy-live:
-    when:
-      equal: [main, << pipeline.git.branch >>]
-    jobs:
-      - terraform_apply:
-          context: react-s3-live
-          stage: live
-      - build_and_deploy:
-          context: react-s3-live
-          stage: live
-          requires:
-            - terraform_apply
+            - "Terraform Init"
+      # - build_and_deploy:
+      #     context: react-s3-dev
+      #     stage: dev
+      #     requires:
+      #       - terraform_apply
+  # deploy-live:
+  #   when:
+  #     equal: [main, << pipeline.git.branch >>]
+  #   jobs:
+  #     - terraform_apply:
+  #         context: react-s3-live
+  #         stage: live
+  #     - build_and_deploy:
+  #         context: react-s3-live
+  #         stage: live
+  #         requires:
+  #           - terraform_apply
